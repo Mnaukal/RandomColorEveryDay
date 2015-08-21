@@ -1,0 +1,16 @@
+html, body {
+    padding: 0px;
+    margin: 0px;
+    font-family: verdana;
+}
+
+#title {
+    background: rgba(0, 0, 0, 0.5);
+    color: #FFF;
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    text-align: center;
+    top: 35%;
+    font-size: 25px;
+}
