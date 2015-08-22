@@ -38,6 +38,12 @@ catch(PDOException $e)
         <title><?php print($color); ?> - Random Color of the Day</title>
         <link rel="stylesheet" href="style.css"> 
         
+        
+        <meta property="og:url"           content="http://random-color-of-the-day.funsite.cz" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Today's random color is <?php print($color); ?>" />
+        <meta property="og:description"   content="Random Color of the Day" />
+    </head>
         <!--       
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 -->
@@ -67,6 +73,16 @@ catch(PDOException $e)
                 
                  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://random-color-of-the-day.funsite.cz/">Tweet</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        
+        <br><br><br>
+            <div class="a2a_kit a2a_kit_size_32 a2a_default_style" data-a2a-url="http://random-color-of-the-day.funsite.cz" data-a2a-title="Today's random color is <?php print($color); ?>">
+                <a class="a2a_button_facebook"></a>
+                <a class="a2a_button_twitter"></a>
+                <a class="a2a_button_google_plus"></a>
+                <a class="a2a_dd" href="https://www.addtoany.com/share_save"></a>
+            </div>
+
+            <script async src="//static.addtoany.com/menu/page.js"></script>
         </div>
 
     </body>
