@@ -22,6 +22,48 @@ try {
     $result = $stm->fetch(PDO::FETCH_OBJ);
 
     $color = "#".$result->color;
+    
+    // RGB -------------------------------------
+    $R = hexdec(substr($color, 1, 2));
+    $G = hexdec(substr($color, 3, 2));
+    $B = hexdec(substr($color, 5, 2));
+    
+    // HSV -------------------------------------
+    $var_R = ($R / 255);
+    $var_G = ($G / 255);
+    $var_B = ($B / 255);
+
+    $var_Min = min($var_R, $var_G, $var_B);
+    $var_Max = max($var_R, $var_G, $var_B);
+    $del_Max = $var_Max - $var_Min;
+
+    $V = $var_Max;
+
+    if ($del_Max == 0)
+    {
+        $H = 0;
+        $S = 0;
+    }
+    else
+    {
+        $S = $del_Max / $var_Max;
+
+        $del_R = ( ( ( $var_Max - $var_R ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+        $del_G = ( ( ( $var_Max - $var_G ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+        $del_B = ( ( ( $var_Max - $var_B ) / 6 ) + ( $del_Max / 2 ) ) / $del_Max;
+
+        if      ($var_R == $var_Max) $H = $del_B - $del_G;
+        else if ($var_G == $var_Max) $H = ( 1 / 3 ) + $del_R - $del_B;
+            else if ($var_B == $var_Max) $H = ( 2 / 3 ) + $del_G - $del_R;
+
+            if ($H<0) $H++;
+            if ($H>1) $H--;
+    }   
+    $H = round($H * 360);
+    $S = round($S * 100);
+    $V = round($V * 100);
+    
+    
 
     /*** close the database connection ***/
     $dbh = null; 
@@ -37,6 +79,7 @@ catch(PDOException $e)
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title><?php print($color); ?> - Random Color of the Day</title>
         <link rel="stylesheet" href="style.css"> 
+        <link rel="icon" type="image/png" href="color.png" />
         
         
         <meta property="og:url"           content="http://random-color-of-the-day.funsite.cz" />
@@ -109,6 +152,22 @@ catch(PDOException $e)
             </div>
 
             <script async src="//static.addtoany.com/menu/page.js"></script>-->
+        </div>
+        
+        <div id="RGB">
+           <table border="0">
+               <tr><td>Red:</td><td><?php print($R) ?></td></tr>
+               <tr><td>Green:</td><td><?php print($G) ?></td></tr>
+               <tr><td>Blue:</td><td><?php print($B) ?></td></tr>
+            </table>
+        </div>
+        
+        <div id="HSV">
+            <table border="0">
+                <tr><td>Hue:</td><td><?php print($H) ?></td></tr>
+                <tr><td>Saturation:</td><td><?php print($S) ?></td></tr>
+                <tr><td>Brightness:</td><td><?php print($V) ?></td></tr>
+            </table>
         </div>
 
     </body>
