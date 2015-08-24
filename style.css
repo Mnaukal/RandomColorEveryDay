@@ -21,7 +21,7 @@ html, body {
     color: #FFF;
     position: absolute;
     text-align: cente;
-    top: 80%;
+    top: 100%;
     font-size: 25px;
     padding: 10px;
 }
@@ -32,4 +32,31 @@ html, body {
 
 #HSV {
     right: 30%;
+}
+
+#schemes {
+    position: absolute;
+    top: 120%;
+    width: 100%;
+}
+
+#schemes h1, h3 {
+    margin-left: 20px;
+}
+
+.scheme {
+    height: 150px;
+}
+
+.color {
+    width: 10%;
+    height: 90px;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+#shades {
+    color: #FFF;
 }
