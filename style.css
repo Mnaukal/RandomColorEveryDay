@@ -60,3 +60,7 @@ html, body {
 #shades {
     color: #FFF;
 }
+
+#analogous .color, #complementary .color {
+    width: 14.2857%;
+}
