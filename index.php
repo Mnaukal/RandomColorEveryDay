@@ -1,8 +1,7 @@
 <!doctype html>
 <html>    
     <?php
-function clamp($value)
-{
+function clamp($value){
     if($value >= 360)
         $value -= 360;
     if($value < 0)
@@ -10,8 +9,7 @@ function clamp($value)
     return $value;
 }
 
-function rotateHue($amount, $iH, $iS, $iV)
-{
+function rotateHue($amount, $iH, $iS, $iV){
     $H2 = clamp($iH + $amount);
     
     $dS = $iS/100.0; // Saturation: 0.0-1.0
@@ -43,7 +41,6 @@ function rotateHue($amount, $iH, $iS, $iV)
     
     return "#".sprintf("%02X", round($dR)).sprintf("%02X", round($dG)).sprintf("%02X", round($dB));
 }
-
 
 /*** mysql data ***/
 $hostname = 'localhost';
@@ -107,6 +104,18 @@ try {
     $S = round($S * 100);
     $V = round($V * 100);
 
+    //HSL -------------------------------------
+    $Ha = $H;
+    if((200 - $S) * $V < 10000)
+        $Sa = $S * $V / ((200 - $S) * $V);
+    else
+        $Sa = $S * $V / (20000 - (200 - $S) * $V) * 100;
+        
+    $La = (200 - $S) * $V / 200;
+    
+    $Sa = round($Sa);
+    $La = round($La);
+    //------------------------------------------------
 
 
     /*** close the database connection ***/
@@ -132,6 +141,16 @@ catch(PDOException $e)
         <meta property="og:description"   content="Random Color of the Day" />
         <meta property="og:image"         content="http://random-color-of-the-day.funsite.cz/color.png" />
 
+   
+        <style>
+            html, body {
+                color: <?php 
+if($La > 50)
+    echo("#000");
+else 
+    echo("#FFF"); ?>
+            }
+        </style>
     </head>
     <!--       
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -144,6 +163,9 @@ catch(PDOException $e)
     </head>
 
 <body style="background:<?php print($color) ?>">
+   <div id="top"></div>
+   
+   
     <!-- Facebook -->
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -158,20 +180,19 @@ catch(PDOException $e)
 {lang: 'cs'}
 </script>-->
 
-    <span class="st_sharethis" st_url="http://random-color-of-the-day.funsite.cz/" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">
         stLight.options({
             publisher:'12345',
         });
-    </script>
+    </script>-->
 
 
     <div id="title">
         <h2>Today's random color is </h2>
         <h1><?php print($color); ?></h1>
 
+        <!--<span st_url="http://random-color-of-the-day.funsite.cz/" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day" class='st_sharethis_vcount' displayText='ShareThis'></span>-->
         <span class='st_sharethis_vcount' displayText='ShareThis'></span>
         <span class='st_facebook_vcount' displayText='Facebook'></span>
         <span class='st_googleplus_vcount' displayText='Google +'></span>
@@ -197,21 +218,42 @@ catch(PDOException $e)
 
 <script async src="//static.addtoany.com/menu/page.js"></script>-->
     </div>
+    
+    <div id="menu">
 
-    <div id="RGB">
-        <table border="0">
-            <tr><td>Red:</td><td><?php print($R) ?></td></tr>
-            <tr><td>Green:</td><td><?php print($G) ?></td></tr>
-            <tr><td>Blue:</td><td><?php print($B) ?></td></tr>
-        </table>
+        <ul>
+            <li><a href="#top"><?php print($color); ?></a></li>
+            <li><a href="#info">Color info</a></li>
+            <li><a href="#schemes">Color Schemes</a></li>
+            <li><a href="#generate">Generate</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
     </div>
+    
+    <div id="info">
+        <div id="RGB">
+            <table border="0">
+                <tr><td>Red:</td><td><?php print($R) ?></td></tr>
+                <tr><td>Green:</td><td><?php print($G) ?></td></tr>
+                <tr><td>Blue:</td><td><?php print($B) ?></td></tr>
+            </table>
+        </div>
 
-    <div id="HSV">
-        <table border="0">
-            <tr><td>Hue:</td><td><?php print($H) ?></td></tr>
-            <tr><td>Saturation:</td><td><?php print($S) ?></td></tr>
-            <tr><td>Value:</td><td><?php print($V) ?></td></tr>
-        </table>
+        <div id="HSV">
+            <table border="0">
+                <tr><td>Hue:</td><td><?php print($H) ?></td></tr>
+                <tr><td>Saturation:</td><td><?php print($S) ?></td></tr>
+                <tr><td>Value:</td><td><?php print($V) ?></td></tr>
+            </table>
+        </div>
+        
+        <div id="HSL">
+            <table border="0">
+                <tr><td>Hue:</td><td><?php print($Ha) ?></td></tr>
+                <tr><td>Saturation:</td><td><?php print($Sa) ?></td></tr>
+                <tr><td>Lightness:</td><td><?php print($La) ?></td></tr>
+            </table>
+        </div>
     </div>
 
     <div id="schemes">
@@ -318,8 +360,7 @@ catch(PDOException $e)
                            sprintf("%02X", $B * (1 - 1)));
                 ?>
             </div>
-        </div>
-        
+        </div>        
         
         <div class="scheme" id="tints">
             <h3>Tints</h3>
@@ -455,8 +496,7 @@ catch(PDOException $e)
                 <?php echo(rotateHue(30, $H, $S, $V));
                 ?>
             </div>
-        </div>
-       
+        </div>       
        
         <div class="scheme" id="complementary">
             <h3>Complementary</h3>
