@@ -604,5 +604,16 @@ else
                 ?>
             </div>
         </div>
+        
+        <script>
+            var colors = document.getElementsByClassName("color");
+            for (var i = 0; i < colors.length; i++)
+                colors[i].addEventListener("click", click);
+
+            function click() {
+                var text = this.innerText;
+                window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+            }
+        </script>
 </body>
 </html>
