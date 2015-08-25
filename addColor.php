@@ -20,7 +20,7 @@ try {
     /*** echo the number of affected rows ***/
     //echo $count;
     
-    header("Content-type: image/png");
+    //header("Content-type: image/png");
     $im     = imagecreatefrompng("color.png");
     
     $r = hexdec(substr($color, 0, 2));
@@ -35,6 +35,8 @@ try {
 
     /*** close the database connection ***/
     $dbh = null;
+    
+    echo ($color);
 }
 catch(PDOException $e)
 {

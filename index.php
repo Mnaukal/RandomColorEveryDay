@@ -1,16 +1,23 @@
 <!doctype html>
 <html>    
     <?php
-function clamp($value){
-    if($value >= 360)
-        $value -= 360;
-    if($value < 0)
-        $value += 360;
+function clamp($value, $min, $max){
+    if($value >= $max)
+        $value -= $max;
+    if($value < $min)
+        $value += $max;
     return $value;
 }
 
-function rotateHue($amount, $iH, $iS, $iV){
-    $H2 = clamp($iH + $amount);
+function rotateHue($amount, $iH, $iS, $iV, $changeValue = false){
+    if($changeValue){
+        if($iV < 50)
+            $iV += 20;
+        else
+            $iV -= 20;
+    }
+    
+    $H2 = clamp($iH + $amount, 0, 360);
     
     $dS = $iS/100.0; // Saturation: 0.0-1.0
         $dV = $iV/100.0; // Lightness:  0.0-1.0
@@ -40,6 +47,13 @@ function rotateHue($amount, $iH, $iS, $iV){
         $dR *= 255; $dG *= 255; $dB *= 255;
     
     return "#".sprintf("%02X", round($dR)).sprintf("%02X", round($dG)).sprintf("%02X", round($dB));
+}
+
+function shiftRGB($iR, $iG, $iB, $dR, $dG, $dB) {
+    return "#" .
+        sprintf("%02X", max(min($iR + $dR, 255), 0)) .
+        sprintf("%02X", max(min($iG + $dG, 255), 0)) .
+        sprintf("%02X", max(min($iB + $dB, 255), 0));
 }
 
 /*** mysql data ***/
@@ -117,6 +131,7 @@ try {
     $La = round($La);
     //------------------------------------------------
 
+    
 
     /*** close the database connection ***/
     $dbh = null; 
@@ -163,7 +178,7 @@ else
     </head>
 
 <body style="background:<?php print($color) ?>">
-   <div id="top"></div>
+    <div id="top"></div>
    
    
     <!-- Facebook -->
@@ -526,6 +541,66 @@ else
             </div>
             <div class="color" style="background: <?php echo(rotateHue(210, $H, $S, $V)); ?>">
                 <?php echo(rotateHue(210, $H, $S, $V));
+                ?>
+            </div>
+        </div>
+        
+        <div class="scheme" id="similar">
+            <h3>Similar</h3>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 30, 0, 0)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, 30, 0, 0));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 0, 30, 0)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, 0, 30, 0));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 0, 0, 30)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, 0, 0, 30));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 0, 0, 0)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, 0, 0, 0));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, -30, 0, 0)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, -30, 0, 0));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 0, -30, 0)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, 0, -30, 0));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 0, 0, -30)); ?>">
+                <?php echo(shiftRGB($R, $G, $B, 0, 0, -30));
+                ?>
+            </div>
+        </div>
+        
+        <div class="scheme" id="triadic">
+            <h3>Triadic</h3>
+            <div class="color" style="background: <?php echo(rotateHue(120, $H, $S, $V)); ?>">
+                <?php echo(rotateHue(120, $H, $S, $V));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(rotateHue(120, $H, $S, $V, true)); ?>">
+                <?php echo(rotateHue(120, $H, $S, $V, true));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(rotateHue(0, $H, $S, $V)); ?>">
+                <?php echo(rotateHue(0, $H, $S, $V));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(rotateHue(0, $H, $S, $V, true)); ?>">
+                <?php echo(rotateHue(0, $H, $S, $V, true));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(rotateHue(-120, $H, $S, $V)); ?>">
+                <?php echo(rotateHue(-120, $H, $S, $V));
+                ?>
+            </div>
+            <div class="color" style="background: <?php echo(rotateHue(-120, $H, $S, $V, true)); ?>">
+                <?php echo(rotateHue(-120, $H, $S, $V, true));
                 ?>
             </div>
         </div>

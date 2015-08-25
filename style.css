@@ -85,6 +85,10 @@ html, body {
     color: #000;
 }
 
-#analogous .color, #complementary .color {
+#analogous .color, #complementary .color, #similar .color {
     width: 14.2857%;
+}
+
+#triadic .color {
+    width: 16.6666%;
 }
