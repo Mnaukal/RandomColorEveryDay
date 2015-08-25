@@ -16,36 +16,52 @@ function rotateHue($amount, $iH, $iS, $iV, $changeValue = false){
         else
             $iV -= 20;
     }
-    
+
     $H2 = clamp($iH + $amount, 0, 360);
-    
+
     $dS = $iS/100.0; // Saturation: 0.0-1.0
-        $dV = $iV/100.0; // Lightness:  0.0-1.0
-        $dC = $dV*$dS;   // Chroma:     0.0-1.0
-        $dH = $H2/60.0;  // H-Prime:    0.0-6.0
-        $dT = $dH;       // Temp variable
-        while($dT >= 2.0) $dT -= 2.0; // php modulus does not work with float
-        $dX = $dC*(1-abs($dT-1));     // as used in the Wikipedia link
-        switch($dH) {
-            case($dH >= 0.0 && $dH < 1.0):
-                $dR = $dC; $dG = $dX; $dB = 0.0; break;
-            case($dH >= 1.0 && $dH < 2.0):
-                $dR = $dX; $dG = $dC; $dB = 0.0; break;
-            case($dH >= 2.0 && $dH < 3.0):
-                $dR = 0.0; $dG = $dC; $dB = $dX; break;
-            case($dH >= 3.0 && $dH < 4.0):
-                $dR = 0.0; $dG = $dX; $dB = $dC; break;
-            case($dH >= 4.0 && $dH < 5.0):
-                $dR = $dX; $dG = 0.0; $dB = $dC; break;
-            case($dH >= 5.0 && $dH < 6.0):
-                $dR = $dC; $dG = 0.0; $dB = $dX; break;
-            default:
-                $dR = 0.0; $dG = 0.0; $dB = 0.0; break;
-        }
-        $dM  = $dV - $dC;
-        $dR += $dM; $dG += $dM; $dB += $dM;
-        $dR *= 255; $dG *= 255; $dB *= 255;
-    
+    $dV = $iV/100.0; // Lightness:  0.0-1.0
+    $dC = $dV*$dS;   // Chroma:     0.0-1.0
+    $dH = $H2/60.0;  // H-Prime:    0.0-6.0
+    $dT = $dH;       // Temp variable
+    while($dT >= 2.0) $dT -= 2.0; // php modulus does not work with float
+    $dX = $dC*(1-abs($dT-1));     // as used in the Wikipedia link
+
+    if($dH >= 0.0 && $dH < 1.0) {
+            $dR = $dC; $dG = $dX; $dB = 0.0;
+    } else if($dH >= 1.0 && $dH < 2.0) {
+            $dR = $dX; $dG = $dC; $dB = 0.0;
+    } else if($dH >= 2.0 && $dH < 3.0) {
+            $dR = 0.0; $dG = $dC; $dB = $dX;
+    } else if($dH >= 3.0 && $dH < 4.0) {
+            $dR = 0.0; $dG = $dX; $dB = $dC;
+    } else if($dH >= 4.0 && $dH < 5.0) {
+            $dR = $dX; $dG = 0.0; $dB = $dC;
+    } else if($dH >= 5.0 && $dH < 6.0) {
+            $dR = $dC; $dG = 0.0; $dB = $dX;
+    } else {
+            $dR = 0.0; $dG = 0.0; $dB = 0.0;
+    } 
+    /*switch($dH) {
+        case($dH >= 0.0 && $dH < 1.0):
+            $dR = $dC; $dG = $dX; $dB = 0.0; break;
+        case($dH >= 1.0 && $dH < 2.0):
+            $dR = $dX; $dG = $dC; $dB = 0.0; break;
+        case($dH >= 2.0 && $dH < 3.0):
+            $dR = 0.0; $dG = $dC; $dB = $dX; break;
+        case($dH >= 3.0 && $dH < 4.0):
+            $dR = 0.0; $dG = $dX; $dB = $dC; break;
+        case($dH >= 4.0 && $dH < 5.0):
+            $dR = $dX; $dG = 0.0; $dB = $dC; break;
+        case($dH >= 5.0 && $dH < 6.0):
+            $dR = $dC; $dG = 0.0; $dB = $dX; break;
+        default:
+            $dR = 0.0; $dG = 0.0; $dB = 0.0; break;
+    }*/
+    $dM  = $dV - $dC;
+    $dR += $dM; $dG += $dM; $dB += $dM;
+    $dR *= 255; $dG *= 255; $dB *= 255;
+
     return "#".sprintf("%02X", round($dR)).sprintf("%02X", round($dG)).sprintf("%02X", round($dB));
 }
 
@@ -65,18 +81,35 @@ $password = 'colorpassword123';
 $color = "#";
 
 try {
-    $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
-    /*** echo a message saying we have connected ***/
+    if(isset($_GET["color"]) && $_GET["color"] && strlen($_GET["color"]) == 6)
+    {
+        $color = "#" . $_GET["color"];
+        $userColor = true;
+    }
+    else {
+        if(isset($_GET["color"])) {
+            echo("<script>alert('Invalid color')</script>");
+        }
+        
+        
+        $userColor = false;
 
-    /*** The SQL SELECT statement ***/
-    $sql = "SELECT * FROM colors
-            ORDER BY ID DESC
-            LIMIT 1;";
-    $stm = $dbh->query($sql);
+        $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+        /*** echo a message saying we have connected ***/
 
-    $result = $stm->fetch(PDO::FETCH_OBJ);
+        /*** The SQL SELECT statement ***/
+        $sql = "SELECT * FROM colors
+                ORDER BY ID DESC
+                LIMIT 1;";
+        $stm = $dbh->query($sql);
 
-    $color = "#".$result->color;
+        $result = $stm->fetch(PDO::FETCH_OBJ);
+
+        $color = "#".$result->color;
+
+        /*** close the database connection ***/
+        $dbh = null; 
+    }
 
     // RGB -------------------------------------
     $R = hexdec(substr($color, 1, 2));
@@ -123,18 +156,17 @@ try {
     if((200 - $S) * $V < 10000)
         $Sa = $S * $V / ((200 - $S) * $V);
     else
-        $Sa = $S * $V / (20000 - (200 - $S) * $V) * 100;
-        
+        if($S == 0 && $V == 100) {
+            $Sa = 0;
+    } else {
+            $Sa = $S * $V / (20000 - (200 - $S) * $V) * 100;
+        }
+
     $La = (200 - $S) * $V / 200;
-    
+
     $Sa = round($Sa);
     $La = round($La);
     //------------------------------------------------
-
-    
-
-    /*** close the database connection ***/
-    $dbh = null; 
 }
 catch(PDOException $e)
 {
@@ -149,18 +181,16 @@ catch(PDOException $e)
         <link rel="stylesheet" href="style.css"> 
         <link rel="icon" type="image/png" href="color.png" />
 
-
         <meta property="og:url"           content="http://random-color-of-the-day.funsite.cz" />
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="Today's random color is <?php print($color); ?>" />
         <meta property="og:description"   content="Random Color of the Day" />
         <meta property="og:image"         content="http://random-color-of-the-day.funsite.cz/color.png" />
 
-   
         <style>
             html, body {
                 color: <?php 
-if($La > 50)
+if($La >= 50)
     echo("#000");
 else 
     echo("#FFF"); ?>
@@ -179,8 +209,8 @@ else
 
 <body style="background:<?php print($color) ?>">
     <div id="top"></div>
-   
-   
+
+
     <!-- Facebook -->
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
@@ -196,15 +226,15 @@ else
 </script>-->
 
     <!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-    <script type="text/javascript">
-        stLight.options({
-            publisher:'12345',
-        });
-    </script>-->
+<script type="text/javascript">
+stLight.options({
+publisher:'12345',
+});
+</script>-->
 
 
     <div id="title">
-        <h2>Today's random color is </h2>
+        <h2><?php echo(!$userColor ? "Today's random color is " : "Generated schemes for "); ?></h2>
         <h1><?php print($color); ?></h1>
 
         <!--<span st_url="http://random-color-of-the-day.funsite.cz/" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day" class='st_sharethis_vcount' displayText='ShareThis'></span>-->
@@ -233,18 +263,18 @@ else
 
 <script async src="//static.addtoany.com/menu/page.js"></script>-->
     </div>
-    
+
     <div id="menu">
 
         <ul>
             <li><a href="#top"><?php print($color); ?></a></li>
             <li><a href="#info">Color info</a></li>
             <li><a href="#schemes">Color Schemes</a></li>
-            <li><a href="#generate">Generate</a></li>
+            <li><a href="#generate">Generate Schemes</a></li>
             <li><a href="#about">About</a></li>
         </ul>
     </div>
-    
+
     <div id="info">
         <div id="RGB">
             <table border="0">
@@ -261,7 +291,7 @@ else
                 <tr><td>Value:</td><td><?php print($V) ?></td></tr>
             </table>
         </div>
-        
+
         <div id="HSL">
             <table border="0">
                 <tr><td>Hue:</td><td><?php print($Ha) ?></td></tr>
@@ -376,7 +406,7 @@ else
                 ?>
             </div>
         </div>        
-        
+
         <div class="scheme" id="tints">
             <h3>Tints</h3>
             <div class="color" style="background: <?php echo("#" .
@@ -394,9 +424,9 @@ else
                                                              sprintf("%02X", 255 * 0.2 + $G * (1 - 0.2)) .
                                                              sprintf("%02X", 255 * 0.2 + $B * (1 - 0.2))); ?>">
                 <?php echo("#" .
-                           sprintf("%02X", 255 * 0.2 + $R * (1 - 0.3)) .
-                           sprintf("%02X", 255 * 0.2 + $G * (1 - 0.3)) .
-                           sprintf("%02X", 255 * 0.2 + $B * (1 - 0.3)));
+                           sprintf("%02X", 255 * 0.2 + $R * (1 - 0.2)) .
+                           sprintf("%02X", 255 * 0.2 + $G * (1 - 0.2)) .
+                           sprintf("%02X", 255 * 0.2 + $B * (1 - 0.2)));
                 ?>
             </div>
             <div class="color" style="background: <?php echo("#" .
@@ -479,7 +509,7 @@ else
                            sprintf("%02X", 255 * 1 + $B * (1 - 1)));
                 ?>
             </div>
-    </div>
+        </div>
 
         <div class="scheme" id="analogous">
             <h3>Analogous</h3>
@@ -512,7 +542,7 @@ else
                 ?>
             </div>
         </div>       
-       
+
         <div class="scheme" id="complementary">
             <h3>Complementary</h3>
             <div class="color" style="background: <?php echo(rotateHue(150, $H, $S, $V)); ?>">
@@ -544,7 +574,7 @@ else
                 ?>
             </div>
         </div>
-        
+
         <div class="scheme" id="similar">
             <h3>Similar</h3>
             <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 30, 0, 0)); ?>">
@@ -576,7 +606,7 @@ else
                 ?>
             </div>
         </div>
-        
+
         <div class="scheme" id="triadic">
             <h3>Triadic</h3>
             <div class="color" style="background: <?php echo(rotateHue(120, $H, $S, $V)); ?>">
@@ -604,16 +634,30 @@ else
                 ?>
             </div>
         </div>
-        
-        <script>
-            var colors = document.getElementsByClassName("color");
-            for (var i = 0; i < colors.length; i++)
-                colors[i].addEventListener("click", click);
 
-            function click() {
-                var text = this.innerText;
-                window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
-            }
-        </script>
+    </div>
+
+    <div id="generate">
+        <h1>Generate schemes</h1>
+        <form method="get">
+            #<input name="color" type="text" maxlength="6">
+            <input type="submit" value="Generate">
+        </form>
+    </div>
+
+    <div id="about">
+        <h1>About</h1>
+    </div>
+
+    <script>
+        var colors = document.getElementsByClassName("color");
+        for (var i = 0; i < colors.length; i++)
+            colors[i].addEventListener("click", click);
+
+        function click() {
+            var text = this.innerText;
+            window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+        }
+    </script>
 </body>
 </html>

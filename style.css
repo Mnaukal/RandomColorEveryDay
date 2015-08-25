@@ -2,6 +2,7 @@ html, body {
     padding: 0px;
     margin: 0px;
     font-family: verdana;
+    color: #000;
 }
 
 #title {
@@ -91,4 +92,14 @@ html, body {
 
 #triadic .color {
     width: 16.6666%;
+}
+
+#generate {
+    position: absolute;
+    top: 250%;
+}
+
+#about {
+    position: absolute;
+    top: 300%;
 }
