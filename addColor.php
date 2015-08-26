@@ -10,7 +10,7 @@ try {
     /*** echo a message saying we have connected ***/
     //echo 'Connected to database<br>';
     
-    $color = sprintf ("%06x", mt_rand(0, 0xffffff));
+    $color = sprintf ("%06X", mt_rand(0, 0xffffff));
     
     $date = date("Y-m-d");
     

@@ -153,19 +153,23 @@ try {
 
     //HSL -------------------------------------
     $Ha = $H;
-    if((200 - $S) * $V < 10000)
-        $Sa = $S * $V / ((200 - $S) * $V);
+    
+    $Sad = $S/100;
+    $Vad = $V/100;    
+    
+    if((2 - $Sad) * $Vad < 1)
+        $Sa = $Sad * $Vad / ((2 - $Sad) * $Vad);
     else
-        if($S == 0 && $V == 100) {
+        if($Sad == 0 && $Vad == 1) {
             $Sa = 0;
     } else {
-            $Sa = $S * $V / (20000 - (200 - $S) * $V) * 100;
+            $Sa = $Sad * $Vad / (2 - (2 - $Sad) * $Vad) * 1;
         }
 
-    $La = (200 - $S) * $V / 200;
+    $La = (2 - $Sad) * $Vad / 2;
 
-    $Sa = round($Sa);
-    $La = round($La);
+    $Sa = round($Sa * 100);
+    $La = round($La * 100);
     //------------------------------------------------
 }
 catch(PDOException $e)
@@ -276,6 +280,14 @@ publisher:'12345',
     </div>
 
     <div id="info">
+        <?php 
+if($La >= 50)
+    {
+    echo("This color is light, we recommend dark (black) text.");
+}
+else {
+    echo("This color is dark, we recommend light (white) text.");
+} ?>    
         <div id="RGB">
             <table border="0">
                 <tr><td>Red:</td><td><?php print($R) ?></td></tr>
@@ -525,8 +537,8 @@ publisher:'12345',
                 <?php echo(rotateHue(-10, $H, $S, $V));
                 ?>
             </div>
-            <div class="color" style="background: <?php echo(rotateHue(0, $H, $S, $V)); ?>">
-                <?php echo(rotateHue(0, $H, $S, $V));
+            <div class="color" style="background: <?php print($color); ?>">
+                <?php print($color);
                 ?>
             </div>
             <div class="color" style="background: <?php echo(rotateHue(10, $H, $S, $V)); ?>">
@@ -617,9 +629,8 @@ publisher:'12345',
                 <?php echo(rotateHue(120, $H, $S, $V, true));
                 ?>
             </div>
-            <div class="color" style="background: <?php echo(rotateHue(0, $H, $S, $V)); ?>">
-                <?php echo(rotateHue(0, $H, $S, $V));
-                ?>
+            <div class="color" style="background: <?php print($color); ?>">
+                <?php print($color); ?>
             </div>
             <div class="color" style="background: <?php echo(rotateHue(0, $H, $S, $V, true)); ?>">
                 <?php echo(rotateHue(0, $H, $S, $V, true));
