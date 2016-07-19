@@ -78,12 +78,6 @@ function shiftRGB($iR, $iG, $iB, $dR, $dG, $dB) {
         sprintf("%02X", max(min($iB + $dB, 255), 0));
 }
 
-/*** mysql data ***/
-$hostname = 'localhost';
-$dbname = 'randomcoloroftheday';
-$username = 'randomcoloruser';
-$password = 'colorpassword123';
-
 $color = "#";
 
 try {
@@ -97,10 +91,11 @@ try {
             echo("<script>alert('Invalid color')</script>");
         }
 
-
         $userColor = false;
 
-        $dbh = new PDO("mysql:host=$hostname;dbname=$dbname", $username, $password);
+        $dbData = parse_ini_file("config.ini");
+
+        $dbh = new PDO("mysql:host={$dbData['hostname']};dbname={$dbData['dbname']}", $dbData['username'], $dbData['password']);
         /*** echo a message saying we have connected ***/
 
         /*** The SQL SELECT statement ***/
