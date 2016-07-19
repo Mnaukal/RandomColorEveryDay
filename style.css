@@ -101,15 +101,11 @@ html, body {
     padding-top: 20px;
 }
 
-#shades {
+#shades .color {
     color: #FFF;
 }
 
-#shades h3 {
-    color: #000;
-}
-
-#tints {
+#tints .color {
     color: #000;
 }
 
@@ -131,4 +127,24 @@ html, body {
 
 #advertisement {
     clear: both;
+}
+
+#previous {
+    clear: both;
+}
+
+.previousColor {
+    float: left;
+    height: 40px;
+    width: 8.3333333%;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.previousColor span {
+    opacity: 0.3;
+}
+
+.previousColor span:hover {
+    opacity: 1;
 }

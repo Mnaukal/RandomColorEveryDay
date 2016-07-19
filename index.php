@@ -209,29 +209,6 @@
 <body style="background:<?php print($color) ?>">
     <div id="top"></div>
 
-
-    <!-- Facebook -->
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v2.4&appId=424757477717430";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-    <!-- Google 
-<script src="https://apis.google.com/js/platform.js" async defer>
-{lang: 'cs'}
-</script>-->
-
-    <!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">
-stLight.options({
-publisher:'12345',
-});
-</script>-->
-
-
     <div id="title">
         <h2><?php echo(!$userColor ? "Today's random color is " : "Generated schemes for "); ?></h2>
         <h1><?php print($color); ?></h1>
@@ -242,10 +219,6 @@ publisher:'12345',
         <span class='st_twitter_large' displayText='Tweet'         st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
         <span class='st_pinterest_large' displayText='Pinterest'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
         <span class='st_email_large' displayText='Email'           st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-
-
-        <!--<div class="fb-share-button" data-href="http://random-color-of-the-day.funsite.cz/" data-layout="box_count"></div>
-<div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60" data-href="http://random-color-of-the-day.funsite.cz/"></div> <! -->
 
     </div>
 
@@ -648,6 +621,80 @@ publisher:'12345',
         <div id="advertisement">
             <h1>Advertisement</h1>
             <endora></endora>
+        </div>
+        
+        <div id="previous">
+            <h1>Previous daily random colors</h1>
+            <?php
+                try {
+                    $dbData = parse_ini_file("config.ini");
+
+                    $dbh = new PDO("mysql:host={$dbData['hostname']};dbname={$dbData['dbname']}", $dbData['username'], $dbData['password']);    /*** echo a message saying we have connected ***/
+
+                    /*** The SQL SELECT statement ***/
+                    $sql = "SELECT * FROM colors
+                            ORDER BY ID DESC";
+                    foreach ($dbh->query($sql) as $row)
+                    {
+                        $R = hexdec(substr($row['color'], 0, 2));
+                        $G = hexdec(substr($row['color'], 2, 2));
+                        $B = hexdec(substr($row['color'], 4, 2));
+
+                        // HSV -------------------------------------
+                        $var_R = ($R / 255);
+                        $var_G = ($G / 255);
+                        $var_B = ($B / 255);
+
+                        $var_Min = min($var_R, $var_G, $var_B);
+                        $var_Max = max($var_R, $var_G, $var_B);
+                        $del_Max = $var_Max - $var_Min;
+
+                        $V = $var_Max;
+
+                        if ($del_Max == 0)
+                        {
+                            $H = 0;
+                            $S = 0;
+                        }
+                        else
+                        {
+                            $S = $del_Max / $var_Max;
+                        }   
+
+                        $La = (2 - $S) * $V / 2;
+
+                        $La = round($La * 100);
+
+                        if($La >= 50)
+                        {
+                            $foreground = "#000";
+                        }
+                        else
+                        {
+                            $foreground = "#FFF";
+                        }                        
+                        
+                        echo("
+                        <a href=index.php?color={$row['color']}>
+                            <div class='previousColor' style='background: #{$row['color']}; color: $foreground'>
+                                <span>
+                                    #{$row['color']}<br>
+                                    {$row['date']}
+                                </span>
+                            </div>
+                        </a>
+                        ");
+                    }
+
+
+                    /*** close the database connection ***/
+                    $dbh = null; 
+                }
+                catch(PDOException $e)
+                {
+                    echo $e->getMessage();
+                }
+            ?>
         </div>
     </div>
 
