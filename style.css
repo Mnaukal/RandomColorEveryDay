@@ -58,7 +58,7 @@ html, body {
     width: 100%;
 }
 
-#page h1, h3 {
+#page h1, h2 {
     margin-left: 20px;
     margin-bottom: 5px;
 }
@@ -117,16 +117,25 @@ html, body {
     width: 16.6666%;
 }
 
-#generate {
-    clear: both;
-}
-
-#about {
+#generate, #about, #usage, #advertisement {
     clear: both;
 }
 
 #advertisement {
-    clear: both;
+    margin-left: 20px;
+}
+#advertisement h2 {
+    margin-left: 0px;
+}
+
+p {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+code {
+    margin-left: 20px;
+    padding: 8px;
 }
 
 #previous {

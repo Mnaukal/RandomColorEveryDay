@@ -180,6 +180,7 @@
         <link rel="stylesheet" href="style.css"> 
         <link rel="icon" type="image/png" href="color.png" />
 
+        <meta property="fb:app_id" content="424757477717430" />
         <meta property="og:url"           content="http://random-color-of-the-day.funsite.cz" />
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="Today's random color is <?php print($color); ?>" />
@@ -274,7 +275,7 @@
         <div id="schemes">
             <h1>Color Schemes</h1>
             <div class="scheme" id="shades">
-                <h3>Shades</h3>
+                <h2>Shades</h2>
                 <div class="color" style="background: <?php echo("#" .
                                                                  sprintf("%02X", $R * (1 - 0.1)) .
                                                                  sprintf("%02X", $G * (1 - 0.1)) .
@@ -378,7 +379,7 @@
             </div>        
 
             <div class="scheme" id="tints">
-                <h3>Tints</h3>
+                <h2>Tints</h2>
                 <div class="color" style="background: <?php echo("#" .
                                                                  sprintf("%02X", 255 * 0.1 + $R * (1 - 0.1)) .
                                                                  sprintf("%02X", 255 * 0.1 + $G * (1 - 0.1)) .
@@ -482,7 +483,7 @@
             </div>
 
             <div class="scheme" id="analogous">
-                <h3>Analogous</h3>
+                <h2>Analogous</h2>
                 <div class="color" style="background: <?php echo(rotateHue(-30, $H, $S, $V)); ?>">
                     <?php echo(rotateHue(-30, $H, $S, $V));
                     ?>
@@ -514,7 +515,7 @@
             </div>       
 
             <div class="scheme" id="complementary">
-                <h3>Complementary</h3>
+                <h2>Complementary</h2>
                 <div class="color" style="background: <?php echo(rotateHue(150, $H, $S, $V)); ?>">
                     <?php echo(rotateHue(150, $H, $S, $V));
                     ?>
@@ -546,7 +547,7 @@
             </div>
 
             <div class="scheme" id="similar">
-                <h3>Similar</h3>
+                <h2>Similar</h2>
                 <div class="color" style="background: <?php echo(shiftRGB($R, $G, $B, 30, 0, 0)); ?>">
                     <?php echo(shiftRGB($R, $G, $B, 30, 0, 0));
                     ?>
@@ -578,7 +579,7 @@
             </div>
 
             <div class="scheme" id="triadic">
-                <h3>Triadic</h3>
+                <h2>Triadic</h2>
                 <div class="color" style="background: <?php echo(rotateHue(120, $H, $S, $V)); ?>">
                     <?php echo(rotateHue(120, $H, $S, $V));
                     ?>
@@ -609,18 +610,32 @@
         <div id="generate">
             <h1>Generate schemes</h1>
             <form method="get">
-                #<input name="color" type="text" maxlength="6">
-                <input type="submit" value="Generate">
+                <p>
+                    #<input name="color" type="text" maxlength="6">
+                    <input type="submit" value="Generate">
+                </p>
             </form>
         </div>
-
+        
+        <div id="usage">
+            <h1>I WANT THIS ON MY WEBSITE!</h1>
+            <p>You can have it. For free. Just import <a href="http://random-color-of-the-day.funsite.cz/stylesheet.php" target="_blank">http://random-color-of-the-day.funsite.cz/stylesheet.php</a> as a stylesheet and use classes you want. You will get new color for your website every day.</p>
+            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">
+                &lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php">
+            </code>
+            <p>Or if you just want to generate the schemes, add <i>?color=...</i> with the hex code of the color you want (without #).</p>
+            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">
+                &lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php?color=FFE000">            </code>
+        </div>
+        
         <div id="about">
             <h1>About</h1>
+            <p>Well, what to say here... It's just my project to play with and learn some PHP. If you like it, you can find more on <a href="" target="_blank">my GitHub.</a></p>
         </div>
 
         <div id="advertisement">
-            <h1>Advertisement</h1>
-            <endora></endora>
+            <h2>Advertisement</h2>
+            <p> <endora/> </p>
         </div>
         
         <div id="previous">

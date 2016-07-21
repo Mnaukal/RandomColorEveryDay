@@ -1,11 +1,10 @@
 /*
 Random Color Of The Day
 http://random-color-of-the-day.funsite.cz/
-
 */
+
 <?php 
 header("Content-type: text/css");
-echo("/*<endora>*/\n\n");
 
 function clamp($value, $min, $max){
     if($value >= $max)
@@ -177,15 +176,58 @@ catch(PDOException $e)
 {
     echo $e->getMessage();
 }
-
 ?>
-
-
-.color {
+.randomColorOfTheDay {
 color: <?php echo($color); ?>;
 }
-.color-back {
+.randomColorOfTheDay-back {
 background: <?php echo($color); ?>;
+}
+
+/*Light or Dark*/
+.foreground-text {
+color: <?php 
+    if($La >= 50)
+    {
+        echo("#000");
+    }
+    else
+    {
+        echo("#FFF");
+    } ?>;
+}
+.foreground-text-back {
+background: <?php 
+    if($La >= 50)
+    {
+        echo("#000");
+    }
+    else
+    {
+        echo("#FFF");
+    } ?>;
+}
+.foreground-text-gray {
+color: <?php 
+    if($La >= 50)
+    {
+        echo("#282828");
+    }
+    else
+    {
+        echo("#D7D7D7");
+    } ?>;
+}
+.foreground-text-gray-back {
+background: <?php 
+    if($La >= 50)
+    {
+        echo("#282828");
+    }
+    else
+    {
+        echo("#D7D7D7");
+    } ?>;
 }
 
 /*Shades*/
@@ -554,3 +596,84 @@ background: <?php echo(rotateHue(210, $H, $S, $V));
 ?>;
 }
 
+/*Similar*/
+.sim1 {
+color: <?php echo(shiftRGB($R, $G, $B, 30, 0, 0)); ?>;
+}
+.sim1-back {
+background: <?php echo(shiftRGB($R, $G, $B, 30, 0, 0)); ?>;
+}
+.sim2 {
+color: <?php echo(shiftRGB($R, $G, $B, 0, 30, 0)); ?>;
+}
+.sim2-back {
+background: <?php echo(shiftRGB($R, $G, $B, 0, 30, 0)); ?>;
+}
+.sim3 {
+color: <?php echo(shiftRGB($R, $G, $B, 0, 0, 30)); ?>;
+}
+.sim3-back {
+background: <?php echo(shiftRGB($R, $G, $B, 0, 0, 30)); ?>;
+}
+.sim4 {
+color: <?php echo(shiftRGB($R, $G, $B, 0, 0, 0)); ?>;
+}
+.sim4-back {
+background: <?php echo(shiftRGB($R, $G, $B, 0, 0, 0)); ?>;
+}
+.sim5 {
+color: <?php echo(shiftRGB($R, $G, $B, -30, 0, 0)); ?>;
+}
+.sim5-back {
+background: <?php echo(shiftRGB($R, $G, $B, -30, 0, 0)); ?>;
+}
+.sim6 {
+color: <?php echo(shiftRGB($R, $G, $B, 0, -30, 0)); ?>;
+}
+.sim6-back {
+background: <?php echo(shiftRGB($R, $G, $B, 0, -30, 0)); ?>;
+}
+.sim7 {
+color: <?php echo(shiftRGB($R, $G, $B, 0, 0, -30)); ?>;
+}
+.sim7-back {
+background: <?php echo(shiftRGB($R, $G, $B, 0, 0, -30)); ?>;
+}
+
+/*Triadic*/
+.tri1 {
+color: <?php echo(rotateHue(120, $H, $S, $V)); ?>;
+}
+.tri1-back {
+background: <?php echo(rotateHue(120, $H, $S, $V)); ?>;
+}
+.tri2 {
+color: <?php echo(rotateHue(120, $H, $S, $V, true)); ?>;
+}
+.tri2-back {
+background: <?php echo(rotateHue(120, $H, $S, $V, true)); ?>;
+}
+.tri3 {
+color: <?php print($color); ?>;
+}
+.tri3-back {
+background: <?php print($color); ?>;
+}
+.tri4 {
+color: <?php echo(rotateHue(0, $H, $S, $V, true)); ?>;
+}
+.tri4-back {
+background: <?php echo(rotateHue(0, $H, $S, $V, true)); ?>;
+}
+.tri5 {
+color: <?php echo(rotateHue(-120, $H, $S, $V)); ?>;
+}
+.tri5-back {
+background: <?php echo(rotateHue(-120, $H, $S, $V)); ?>;
+}
+.tri6 {
+color: <?php echo(rotateHue(-120, $H, $S, $V, true)); ?>;
+}
+.tri6-back {
+background: <?php echo(rotateHue(-120, $H, $S, $V, true)); ?>;
+}
