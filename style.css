@@ -157,3 +157,8 @@ code {
 .previousColor span:hover {
     opacity: 1;
 }
+
+code {
+    display: block;
+    white-space: pre-wrap   
+}

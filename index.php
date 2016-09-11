@@ -195,12 +195,14 @@
                     else 
                         echo("#FFF"); ?>
             }
+            
+            a {
+                color: <?php echo(rotateHue(180, $H, $S, $V)); ?>;
+            }
         </style>
-    </head>
     <!--       
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 -->
-
     <script type="text/javascript">var switchTo5x=true;</script>
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
     <script type="text/javascript">stLight.options({publisher: "8c7bdcce-3269-4889-97c4-c5b8d8cc770e", doNotHash: true, doNotCopy: true, hashAddressBar: false});</script>
@@ -620,12 +622,12 @@
         <div id="usage">
             <h1>I WANT THIS ON MY WEBSITE!</h1>
             <p>You can have it. For free. Just import <a href="http://random-color-of-the-day.funsite.cz/stylesheet.php" target="_blank">http://random-color-of-the-day.funsite.cz/stylesheet.php</a> as a stylesheet and use classes you want. You will get new color for your website every day.</p>
-            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">
-                &lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php">
-            </code>
+            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php"></code>
+            <p>Other option is to import <a href="http://random-color-of-the-day.funsite.cz/stylesheet-variables.php" target="_blank">http://random-color-of-the-day.funsite.cz/stylesheet-variables.php</a> as a stylesheet and use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables" target="_blank">css variables</a> in your own second stylesheet file (this is not compatible with all browsers).</p>
+            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet-variables.php">
+&lt;link rel="stylesheet" type="text/css" href="mystyle.css"></code>
             <p>Or if you just want to generate the schemes, add <i>?color=...</i> with the hex code of the color you want (without #).</p>
-            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">
-                &lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php?color=FFE000">            </code>
+            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php?color=FFE000"></code>
         </div>
         
         <div id="about">
