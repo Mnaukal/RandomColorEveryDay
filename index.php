@@ -12,9 +12,9 @@
     function rotateHue($amount, $iH, $iS, $iV, $changeValue = false){
         if($changeValue){
             if($iV < 50)
-                $iV += 20;
+                $iV += 30;
             else
-                $iV -= 20;
+                $iV -= 30;
         }
 
         $H2 = clamp($iH + $amount, 0, 360);
@@ -197,7 +197,7 @@
             }
             
             a {
-                color: <?php echo(rotateHue(180, $H, $S, $V)); ?>;
+                color: <?php echo(rotateHue(180, $H, $S, $V, true)); ?>;
             }
         </style>
     <!--       
@@ -628,6 +628,9 @@
 &lt;link rel="stylesheet" type="text/css" href="mystyle.css"></code>
             <p>Or if you just want to generate the schemes, add <i>?color=...</i> with the hex code of the color you want (without #).</p>
             <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php?color=FFE000"></code>
+            <h1>API</h1>
+            <p>You can use <a href="http://random-color-of-the-day.funsite.cz/color.php" target="_blank">http://random-color-of-the-day.funsite.cz/color.php</a> as an API with specified parameters of the color you want to know (names are similar to css variables + R,G,B,H,S,V,... just try). Color parameter is not necessary and will use today's color if not specified.</p>
+            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">http://random-color-of-the-day.funsite.cz/color.php?params=R,G,B&amp;color=FFE000 -> 255,224,0</code>
         </div>
         
         <div id="about">
