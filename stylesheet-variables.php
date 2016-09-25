@@ -14,19 +14,19 @@ function clamp($value, $min, $max){
     return $value;
 }
 
-function rotateHue($amount, $iH, $iS, $iV, $changeValue = false){
-    if($changeValue){
-        if($iV < 50)
-            $iV += 20;
+function rotateHue($amount, $iH, $iS, $iL, $changeLightness = false){
+    if($changeLightness){
+        if($iL < 50)
+            $iL += 30;
         else
-            $iV -= 20;
+            $iL -= 30;
     }
 
-    $H2 = clamp($iH + $amount, 0, 360);
+    $H2 = clamp($iH + $amount, 0, 360); //0-360
 
     $dS = $iS/100.0; // Saturation: 0.0-1.0
-    $dV = $iV/100.0; // Lightness:  0.0-1.0
-    $dC = $dV*$dS;   // Chroma:     0.0-1.0
+    $dL = $iL/100.0; // Lightness:  0.0-1.0
+    $dC = (1 - abs(2 * $dL - 1)) * $dS;   // Chroma:     0.0-1.0
     $dH = $H2/60.0;  // H-Prime:    0.0-6.0
     $dT = $dH;       // Temp variable
     while($dT >= 2.0) $dT -= 2.0; // php modulus does not work with float
@@ -47,7 +47,8 @@ function rotateHue($amount, $iH, $iS, $iV, $changeValue = false){
     } else {
         $dR = 0.0; $dG = 0.0; $dB = 0.0;
     } 
-    $dM  = $dV - $dC;
+
+    $dM  = $dL - $dC / 2;
     $dR += $dM; $dG += $dM; $dB += $dM;
     $dR *= 255; $dG *= 255; $dB *= 255;
 
@@ -280,22 +281,22 @@ catch(PDOException $e)
                   sprintf("%02X", 255 * 1 + $B * (1 - 1))); ?>;
 
 /*Analogous*/
---ana1: <?php echo(rotateHue(-30, $H, $S, $V)); ?>;
---ana2: <?php echo(rotateHue(-20, $H, $S, $V)); ?>;
---ana3: <?php  echo(rotateHue(-10, $H, $S, $V)); ?>;
---ana4: <?php  print($color); ?>;
---ana5: <?php  echo(rotateHue(10, $H, $S, $V)); ?>;
---ana6: <?php  echo(rotateHue(20, $H, $S, $V)); ?>;
---ana7: <?php  echo(rotateHue(30, $H, $S, $V)); ?>;
+--ana1: <?php echo(rotateHue(-30, $H, $S, $La)); ?>;
+--ana2: <?php echo(rotateHue(-20, $H, $S, $La)); ?>;
+--ana3: <?php echo(rotateHue(-10, $H, $S, $La)); ?>;
+--ana4: <?php print($color); ?>;
+--ana5: <?php echo(rotateHue(10, $H, $S, $La)); ?>;
+--ana6: <?php echo(rotateHue(20, $H, $S, $La)); ?>;
+--ana7: <?php echo(rotateHue(30, $H, $S, $La)); ?>;
 
 /*Complementary*/
---com1: <?php echo(rotateHue(150, $H, $S, $V)); ?>;
---com2: <?php echo(rotateHue(160, $H, $S, $V)); ?>;
---com3: <?php  echo(rotateHue(170, $H, $S, $V)); ?>;
---com4: <?php echo(rotateHue(180, $H, $S, $V)); ?>;
---com5: <?php  echo(rotateHue(190, $H, $S, $V)); ?>;
---com6: <?php  echo(rotateHue(200, $H, $S, $V)); ?>;
---com7: <?php  echo(rotateHue(210, $H, $S, $V)); ?>;
+--com1: <?php echo(rotateHue(150, $H, $S, $La)); ?>;
+--com2: <?php echo(rotateHue(160, $H, $S, $La)); ?>;
+--com3: <?php echo(rotateHue(170, $H, $S, $La)); ?>;
+--com4: <?php echo(rotateHue(180, $H, $S, $La)); ?>;
+--com5: <?php echo(rotateHue(190, $H, $S, $La)); ?>;
+--com6: <?php echo(rotateHue(200, $H, $S, $La)); ?>;
+--com7: <?php echo(rotateHue(210, $H, $S, $La)); ?>;
 
 /*Similar*/
 --sim1: <?php echo(shiftRGB($R, $G, $B, 30, 0, 0)); ?>;
@@ -307,10 +308,10 @@ catch(PDOException $e)
 --sim7: <?php echo(shiftRGB($R, $G, $B, 0, 0, -30)); ?>;
 
 /*Triadic*/
---tri1: <?php echo(rotateHue(120, $H, $S, $V)); ?>;
---tri2: <?php echo(rotateHue(120, $H, $S, $V, true)); ?>;
+--tri1: <?php echo(rotateHue(120, $H, $S, $La)); ?>;
+--tri2: <?php echo(rotateHue(120, $H, $S, $La, true)); ?>;
 --tri3: <?php print($color); ?>;
---tri4: <?php echo(rotateHue(0, $H, $S, $V, true)); ?>;
---tri5: <?php echo(rotateHue(-120, $H, $S, $V)); ?>;
---tri6: <?php echo(rotateHue(-120, $H, $S, $V, true)); ?>;
+--tri4: <?php echo(rotateHue(0, $H, $S, $La, true)); ?>;
+--tri5: <?php echo(rotateHue(-120, $H, $S, $La)); ?>;
+--tri6: <?php echo(rotateHue(-120, $H, $S, $LA, true)); ?>;
 }
