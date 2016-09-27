@@ -161,7 +161,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title><?php print($color); ?> - Random Color of the Day</title>
+        <title><?php print($color); ?> - Random Color Every Day</title>
         <link rel="stylesheet" href="style.css"> 
         <link rel="icon" type="image/png" href="color.png" />
 
@@ -169,7 +169,7 @@
         <meta property="og:url"           content="http://random-color-of-the-day.funsite.cz" />
         <meta property="og:type"          content="website" />
         <meta property="og:title"         content="Today's random color is <?php print($color); ?>" />
-        <meta property="og:description"   content="Random Color of the Day" />
+        <meta property="og:description"   content="Random Color Every Day" />
         <meta property="og:image"         content="http://random-color-of-the-day.funsite.cz/color.png" />
 
         <style>
@@ -201,12 +201,12 @@
         <h2><?php echo(!$userColor ? "Today's random color is " : "Generated schemes for "); ?></h2>
         <h1><?php print($color); ?></h1>
 
-        <span class='st_sharethis_large' displayText='ShareThis'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-        <span class='st_facebook_large' displayText='Facebook'     st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-        <span class='st_googleplus_large' displayText='Google +'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-        <span class='st_twitter_large' displayText='Tweet'         st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-        <span class='st_pinterest_large' displayText='Pinterest'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
-        <span class='st_email_large' displayText='Email'           st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color of the Day"></span>
+        <span class='st_sharethis_large' displayText='ShareThis'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color Every Day"></span>
+        <span class='st_facebook_large' displayText='Facebook'     st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color Every Day"></span>
+        <span class='st_googleplus_large' displayText='Google +'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color Every Day"></span>
+        <span class='st_twitter_large' displayText='Tweet'         st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color Every Day"></span>
+        <span class='st_pinterest_large' displayText='Pinterest'   st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color Every Day"></span>
+        <span class='st_email_large' displayText='Email'           st_url="random-color-of-the-day.funsite.cz" st_title="Today's random color is <?php print($color); ?>" st_image="http://random-color-of-the-day.funsite.cz/color.png" st_summary="Random Color Every Day"></span>
 
     </div>
 
@@ -217,6 +217,7 @@
             <li><a href="#info">Color info</a></li>
             <li><a href="#schemes">Color Schemes</a></li>
             <li><a href="#generate">Generate Schemes</a></li>
+            <li><a href="https://github.com/Mnaukal/RandomColorEveryDay" target="_blank">Use this on your website</a></li>
             <li><a href="#about">About</a></li>
         </ul>
     </div>
@@ -606,21 +607,13 @@
         
         <div id="usage">
             <h1>I WANT THIS ON MY WEBSITE!</h1>
-            <p>You can have it. For free. Just import <a href="http://random-color-of-the-day.funsite.cz/stylesheet.php" target="_blank">http://random-color-of-the-day.funsite.cz/stylesheet.php</a> as a stylesheet and use classes you want. You will get new color for your website every day.</p>
-            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php"></code>
-            <p>Other option is to import <a href="http://random-color-of-the-day.funsite.cz/stylesheet-variables.php" target="_blank">http://random-color-of-the-day.funsite.cz/stylesheet-variables.php</a> as a stylesheet and use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables" target="_blank">css variables</a> in your own second stylesheet file (this is not compatible with all browsers).</p>
-            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet-variables.php">
-&lt;link rel="stylesheet" type="text/css" href="mystyle.css"></code>
-            <p>Or if you just want to generate the schemes, add <i>?color=...</i> with the hex code of the color you want (without #).</p>
-            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">&lt;link rel="stylesheet" type="text/css" href="http://random-color-of-the-day.funsite.cz/stylesheet.php?color=FFE000"></code>
-            <h1>API</h1>
-            <p>You can use <a href="http://random-color-of-the-day.funsite.cz/color.php" target="_blank">http://random-color-of-the-day.funsite.cz/color.php</a> as an API with specified parameters of the color you want to know (names are similar to css variables + R,G,B,H,S,V,... just try). Color parameter is not necessary and will use today's color if not specified.</p>
-            <code style="background: <?php echo("#" . sprintf("%02X", $R * (1 - 0.2)) . sprintf("%02X", $G * (1 - 0.2)) . sprintf("%02X", $B * (1 - 0.2))); ?>">http://random-color-of-the-day.funsite.cz/color.php?params=R,G,B&amp;color=FFE000 -> 255,224,0</code>
+            <p>You can have it. For free. Documentation and source code is available on GitHub: <a href="https://github.com/Mnaukal/RandomColorEveryDay" target="_blank">https://github.com/Mnaukal/RandomColorEveryDay</a></p>
+            <p>I would also feel free to let me know if you want to use it (you don't have to, but I am just curious) or if you have any problems (you can find contact on GitHub or <a href="http://thetopfer.funsite.cz/" target="_blank">my website</a>).</p>
         </div>
         
         <div id="about">
             <h1>About</h1>
-            <p>Well, what to say here... It's just my project to play with and learn some PHP. If you like it, you can find more on <a href="" target="_blank">my GitHub.</a></p>
+            <p>Well, what to say here... It's just my project to play with and learn some PHP. If you like it, you can find more on <a href="" target="_blank">my GitHub.</a> and <a href="http://thetopfer.funsite.cz/" target="_blank">my website</a></p>
         </div>
 
         <div id="advertisement">

@@ -173,7 +173,7 @@ try {
         {
             switch ($params[$i])
             {
-                case "randomColorOfTheDay": echo($color); break;
+                case "randomColorEveryDay": echo($color); break;
                 case "color": echo($color); break;
                 case "Red": echo($R); break;
                 case "R": echo($R); break;

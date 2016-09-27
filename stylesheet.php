@@ -1,5 +1,5 @@
 /*
-Random Color Of The Day
+Random Color Every Day
 http://random-color-of-the-day.funsite.cz/
 */
 
@@ -162,10 +162,10 @@ catch(PDOException $e)
     echo $e->getMessage();
 }
 ?>
-.randomColorOfTheDay {
+.randomColorEveryDay {
 color: <?php echo($color); ?>;
 }
-.randomColorOfTheDay-back {
+.randomColorEveryDay-back {
 background: <?php echo($color); ?>;
 }
 

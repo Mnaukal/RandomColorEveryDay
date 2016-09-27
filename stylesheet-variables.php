@@ -1,5 +1,5 @@
 /*
-Random Color Of The Day
+Random Color Every Day
 http://random-color-of-the-day.funsite.cz/
 */
 
@@ -163,7 +163,7 @@ catch(PDOException $e)
 }
 ?>
 :root {
---randomColorOfTheDay: <?php echo($color); ?>;
+--randomColorEveryDay: <?php echo($color); ?>;
 
 /* Color Params */
 --rcdRed: <?php echo($R); ?>;
