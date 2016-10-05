@@ -1,6 +1,6 @@
 /*
 Random Color Every Day
-http://random-color-of-the-day.funsite.cz/
+http://randomcoloreveryday.com/
 */
 
 <?php 
