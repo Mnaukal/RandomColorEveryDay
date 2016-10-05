@@ -35,8 +35,8 @@ Variable names are same as class names (plus some extra variables for R,G,B and 
 ```css
 //mystyle.css
 #id-selector {
-color: var(--foreground-text);
-background: var(--ana7);
+	color: var(--foreground-text);
+	background: var(--ana7);
 }
 ```
 
@@ -48,19 +48,26 @@ Or if you just want to generate the schemes, add ?color=... with the hex code of
 
 ## API
 You can use <a href="http://randomcoloreveryday.com/color.php" target="_blank">`http://randomcoloreveryday.com/color.php`</a> as an API with specified parameters of the color you want to know (names are same as the css variables + listed below). Color parameter is not necessary and will use today's color if not specified.
+### Function parameters:
+`params`: color parameters you want to get, separated by delimiter (',')
 * **randomColorEveryDay** or **color** = today's color
 * RGB
-* **Red** or **R** 
-* **Green** or **G** 
-* **Blue** or **B** 
+	* **Red** or **R** 
+	* **Green** or **G** 
+	* **Blue** or **B** 
 * HSV 
-* **Hue** or **H** 
-* **Saturation** or **S** 
-* **Value** or **V** 
+	* **Hue** or **H** 
+	* **Saturation** or **S** 
+	* **Value** or **V** 
 * HSL 
-* **Hue2** or **H2** 
-* **Saturation2** or **S2** 
-* **Lightness** or **L** 
+	* **Hue2** or **H2** 
+	* **Saturation2** or **S2** 
+	* **Lightness** or **L** 
+	
+`delimiter`: delimiter of params (your input and also output), default is ','
+
+`color`: optional parameter, the color used for generating scheme (hex code without #); if not set, today's color is used
+
 ```
 http://randomcoloreveryday.com/color.php?params=R,G,B&color=FFE000 -> 255,224,0
 ```
