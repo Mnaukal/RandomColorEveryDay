@@ -45,7 +45,7 @@ html, body {
 }
 #menu li {
     float: left;
-    padding: 10px 40px;
+    padding: 10px 20px;
     
 }
 #menu li a {
@@ -162,4 +162,17 @@ code {
 code {
     display: block;
     white-space: pre-wrap   
+}
+
+#logo-small {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    opacity: 0.4;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+#logo-small:hover {
+    opacity: 0.8;
 }
