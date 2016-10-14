@@ -8,6 +8,7 @@ Website and API that will generate new random color every day.
 Just import <a href="http://randomcoloreveryday.com/stylesheet.php" target="_blank">`http://randomcoloreveryday.com/stylesheet.php`</a> as a stylesheet and use classes you want. You will get new color for your website every day. 
 * **s1** to **s10** = Shades (dark)
 * **t1** to **t10** = Tints (light)
+* **to1** to **to9** = Tones (changing saturation)
 * **ana1** to **ana7** = Analogous colors
 * **com1** to **com7** = Complementary colors
 * **sim1** to **sim7** = Similar colors

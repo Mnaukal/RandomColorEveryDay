@@ -109,6 +109,10 @@ html, body {
     color: #000;
 }
 
+#tones .color {
+    width: 11.1111%;
+}
+
 #analogous .color, #complementary .color, #similar .color {
     width: 14.2857%;
 }

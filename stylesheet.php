@@ -23,14 +23,15 @@ function rotateHue($amount, $iH, $iS, $iL, $changeLightness = false){
     }
 
     $H2 = clamp($iH + $amount, 0, 360); //0-360
+    $iS = max(min($iS, 100), 0);
 
-    $dS = $iS/100.0; // Saturation: 0.0-1.0
-    $dL = $iL/100.0; // Lightness:  0.0-1.0
+    $dS = $iS / 100.0; // Saturation: 0.0-1.0
+    $dL = $iL / 100.0; // Lightness:  0.0-1.0
     $dC = (1 - abs(2 * $dL - 1)) * $dS;   // Chroma:     0.0-1.0
-    $dH = $H2/60.0;  // H-Prime:    0.0-6.0
+    $dH = $H2 / 60.0;  // H-Prime:    0.0-6.0
     $dT = $dH;       // Temp variable
     while($dT >= 2.0) $dT -= 2.0; // php modulus does not work with float
-    $dX = $dC*(1-abs($dT-1));     // as used in the Wikipedia link
+    $dX = $dC * (1 - abs($dT - 1));
 
     if($dH >= 0.0 && $dH < 1.0) {
         $dR = $dC; $dG = $dX; $dB = 0.0;
@@ -48,7 +49,7 @@ function rotateHue($amount, $iH, $iS, $iL, $changeLightness = false){
         $dR = 0.0; $dG = 0.0; $dB = 0.0;
     } 
 
-    $dM  = $dL - $dC / 2;
+    $dM = $dL - $dC / 2;
     $dR += $dM; $dG += $dM; $dB += $dM;
     $dR *= 255; $dG *= 255; $dB *= 255;
 
@@ -477,6 +478,62 @@ background: <?php echo("#" .
                        sprintf("%02X", 255 * 1 + $G * (1 - 1)) .
                        sprintf("%02X", 255 * 1 + $B * (1 - 1)));
 ?>;
+}
+
+/*Tones*/
+.to1 {
+color: <?php echo(rotateHue(0, $H, $Sa - 60, $La)); ?>;
+}
+.to1-back {
+background: <?php echo(rotateHue(0, $H, $Sa - 60, $La)); ?>;
+}
+.to2 {
+color: <?php echo(rotateHue(0, $H, $Sa - 45, $La)); ?>;
+}
+.to2-back {
+background: <?php echo(rotateHue(0, $H, $Sa - 45, $La)); ?>;
+}
+.to3 {
+color: <?php echo(rotateHue(0, $H, $Sa - 30, $La)); ?>;
+}
+.to3-back {
+background: <?php echo(rotateHue(0, $H, $Sa - 30, $La)); ?>;
+}
+.to4 {
+color: <?php echo(rotateHue(0, $H, $Sa - 15, $La)); ?>;
+}
+.to4-back {
+background: <?php echo(rotateHue(0, $H, $Sa - 15, $La)); ?>;
+}
+.to5 {
+color: <?php echo(rotateHue(0, $H, $Sa, $La)); ?>;
+}
+.to5-back {
+background: <?php echo(rotateHue(0, $H, $Sa, $La)); ?>;
+}
+.to6 {
+color: <?php echo(rotateHue(0, $H, $Sa + 15, $La)); ?>;
+}
+.to6-back {
+background: <?php echo(rotateHue(0, $H, $Sa + 15, $La)); ?>;
+}
+.to7 {
+color: <?php echo(rotateHue(0, $H, $Sa + 30, $La)); ?>;
+}
+.to7-back {
+background: <?php echo(rotateHue(0, $H, $Sa + 30, $La)); ?>;
+}
+.to8 {
+color: <?php echo(rotateHue(0, $H, $Sa + 45, $La)); ?>;
+}
+.to8-back {
+background: <?php echo(rotateHue(0, $H, $Sa + 45, $La)); ?>;
+}
+.to9 {
+color: <?php echo(rotateHue(0, $H, $Sa + 60, $La)); ?>;
+}
+.to9-back {
+background: <?php echo(rotateHue(0, $H, $Sa + 60, $La)); ?>;
 }
 
 /*Analogous*/
