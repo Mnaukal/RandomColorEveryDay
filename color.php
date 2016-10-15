@@ -68,7 +68,7 @@ try {
     }
     else {
         if(isset($_GET["color"])) {
-            echo("<script>alert('Invalid color')</script>");
+            echo("INVALID COLOR PARAMETER");
         }
 
         $userColor = false;

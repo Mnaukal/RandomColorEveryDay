@@ -645,9 +645,9 @@
 
             <div id="generate">
                 <h1>Generate schemes</h1>
-                <form method="get">
+                <form onSubmit="location.href = 'http://randomcoloreveryday.com/' + document.getElementById('color').value; return false; ">
                     <p>
-                        #<input name="color" type="text" maxlength="6">
+                        <input name="color" id="color" type="text" maxlength="6" pattern="[0-9A-Fa-f]{6}">
                         <input type="submit" value="Generate">
                     </p>
                 </form>
@@ -656,12 +656,12 @@
             <div id="usage">
                 <h1>I WANT THIS ON MY WEBSITE!</h1>
                 <p>You can have it. For free. Documentation and source code is available on GitHub: <a href="https://github.com/Mnaukal/RandomColorEveryDay" target="_blank">https://github.com/Mnaukal/RandomColorEveryDay</a></p>
-                <p>I would also feel free to let me know if you want to use it (you don't have to, but I am just curious) or if you have any problems (you can find contact on GitHub or <a href="http://thetopfer.funsite.cz/" target="_blank">my website</a>).</p>
+                <p>Feel free to let me know if you want to use it (you don't have to, but I am just curious) or if you have any problems (you can find contact on <a href="https://github.com/Mnaukal" target="_blank">GitHub</a> or <a href="http://thetopfer.com/" target="_blank">my website</a>).</p>
             </div>
 
             <div id="about">
                 <h1>About</h1>
-                <p>Well, what to say here... It's just my project to play with and learn some PHP. If you like it, you can find more on <a href="" target="_blank">my GitHub.</a> and <a href="http://thetopfer.funsite.cz/" target="_blank">my website</a></p>
+                <p>Well, what to say here... It's just my project to play with and learn some PHP. If you like it, you can find more on <a href="https://github.com/Mnaukal" target="_blank">my GitHub.</a> and <a href="http://thetopfer.com/" target="_blank">my website</a></p>
             </div>
 
             <div id="advertisement">
@@ -721,7 +721,7 @@
                         }                        
 
                         echo("
-                        <a href=index.php?color={$row['color']}>
+                        <a href=/{$row['color']}>
                             <div class='previousColor' style='background: #{$row['color']}; color: $foreground'>
                                 <span>
                                     #{$row['color']}<br>
