@@ -292,15 +292,15 @@ try {
                                  sprintf("%02X", 255 * 1 + $R * (1 - 1)) .
                                  sprintf("%02X", 255 * 1 + $G * (1 - 1)) .
                                  sprintf("%02X", 255 * 1 + $B * (1 - 1))); break;
-                case: "to1": echo(rotateHue(0, $H, $Sa - 60, $La));
-                case: "to2": echo(rotateHue(0, $H, $Sa - 45, $La));
-                case: "to3": echo(rotateHue(0, $H, $Sa - 30, $La));
-                case: "to4": echo(rotateHue(0, $H, $Sa - 15, $La));
-                case: "to5": echo(rotateHue(0, $H, $Sa, $La));
-                case: "to6": echo(rotateHue(0, $H, $Sa + 15, $La));
-                case: "to7": echo(rotateHue(0, $H, $Sa + 30, $La));
-                case: "to8": echo(rotateHue(0, $H, $Sa + 45, $La));
-                case: "to9": echo(rotateHue(0, $H, $Sa + 60, $La));
+                case "to1": echo(rotateHue(0, $H, $Sa - 60, $La)); break;
+                case "to2": echo(rotateHue(0, $H, $Sa - 45, $La)); break;
+                case "to3": echo(rotateHue(0, $H, $Sa - 30, $La)); break;
+                case "to4": echo(rotateHue(0, $H, $Sa - 15, $La)); break;
+                case "to5": echo(rotateHue(0, $H, $Sa, $La)); break;
+                case "to6": echo(rotateHue(0, $H, $Sa + 15, $La)); break;
+                case "to7": echo(rotateHue(0, $H, $Sa + 30, $La)); break;
+                case "to8": echo(rotateHue(0, $H, $Sa + 45, $La)); break;
+                case "to9": echo(rotateHue(0, $H, $Sa + 60, $La)); break;
                 case "ana1": echo(rotateHue(-30, $H, $S, $La)); break;
                 case "ana2": echo(rotateHue(-20, $H, $S, $La)); break;
                 case "ana3": echo(rotateHue(-10, $H, $S, $La)); break;
