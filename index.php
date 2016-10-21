@@ -163,7 +163,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title><?php print($color); ?> - Random Color Every Day</title>
-        <link rel="stylesheet" href="style.css"> 
+        <link rel="stylesheet" href="style.min.css"> 
         <link rel="icon" type="image/png" href="color.png" />
 
         <meta property="fb:app_id" content="424757477717430" />
@@ -172,6 +172,8 @@
         <meta property="og:title"         content="Today's random color is <?php print($color); ?>" />
         <meta property="og:description"   content="Random Color Every Day" />
         <meta property="og:image"         content="http://randomcoloreveryday.com/color.png" />
+        
+        <meta name="theme-color" content="<?php print($color); ?>">
 
         <style>
             html, body {
