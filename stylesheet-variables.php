@@ -2,7 +2,6 @@
 Random Color Every Day
 http://randomcoloreveryday.com/
 */
-
 <?php 
 header("Content-type: text/css");
 
@@ -73,7 +72,7 @@ try {
     }
     else {
         if(isset($_GET["color"])) {
-            echo("INVALID COLOR PARAMETER");
+            echo("/* INVALID COLOR PARAMETER: " . $_GET["color"] . "*/ " . PHP_EOL . PHP_EOL);
         }
 
         $userColor = false;
