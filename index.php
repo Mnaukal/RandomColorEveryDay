@@ -162,6 +162,7 @@
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title><?php print($color); ?> - Random Color Every Day</title>
         <link rel="stylesheet" href="style.min.css"> 
         <link rel="icon" type="image/png" href="color.png" />
@@ -236,6 +237,7 @@
                 <li><a href="#schemes">Color Schemes</a></li>
                 <li><a href="#generate">Generate Schemes</a></li>
                 <li><a href="https://github.com/Mnaukal/RandomColorEveryDay" target="_blank">Use this on your website</a></li>
+                <li><a href="fullscreen">FullScreen Mode</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="https://twitter.com/theTopfer" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @theTopfer</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
             </ul>
@@ -647,7 +649,7 @@
 
             <div id="generate">
                 <h1>Generate schemes</h1>
-                <form onSubmit="location.href = 'http://randomcoloreveryday.com/' + document.getElementById('color').value; return false; ">
+                <form onSubmit="location.href = 'http://' + window.location.hostname + '/' + document.getElementById('color').value; return false; ">
                     <p>
                         <input name="color" id="color" type="text" maxlength="6" pattern="[0-9A-Fa-f]{6}">
                         <input type="submit" value="Generate">

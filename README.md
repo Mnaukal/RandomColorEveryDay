@@ -2,6 +2,7 @@
 Website and API that will generate new random color every day.
 [http://randomcoloreveryday.com/](http://randomcoloreveryday.com/)
 
+*Please note that the domain isn't currently running. Please use [http://http://random-color-of-the-day.funsite.cz/](http://random-color-of-the-day.funsite.cz/) instead.*
 
 ## Use on web
 ### Classes
